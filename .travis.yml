@@ -1,0 +1,30 @@
+os: linux
+sudo: required
+dist: trusty
+
+language: generic
+
+before_install:
+ - echo "deb http://archive.ubuntu.com/ubuntu xenial main restricted" | sudo tee -a "/etc/apt/sources.list"
+ - echo "deb http://archive.ubuntu.com/ubuntu xenial-updates main restricted" | sudo tee -a "/etc/apt/sources.list"
+
+ - sudo touch /etc/apt/apt.conf.d/99defaultrelease
+ - echo -n "APT::Default-Release trusty;" | sudo tee -a "/etc/apt/apt.conf.d/99defaultrelease"
+
+ - sudo apt-get update
+
+install:
+ - sudo apt-get remove cmake
+ - sudo apt-get -t xenial install cmake
+
+ - sudo apt-get remove gcc
+ - sudo apt-get -t xenial install gcc
+
+ - sudo apt-get remove g++
+ - sudo apt-get -t xenial install g++
+ 
+script:
+ - mkdir build
+ - cd build
+ - cmake ..
+ - make

@@ -11,7 +11,7 @@ include("utilities")
 # > libfw_src_files
 #
 set(libfw_src_files
-    # temp, no files
+    "src/core/exception.cpp"
 )
 fw_process_src_files(${libfw_src_files})
 

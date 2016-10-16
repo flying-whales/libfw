@@ -6,15 +6,15 @@
 namespace fw
 {
 
-	Vector3::Vector3()
+	inline Vector3::Vector3()
 		: Metric3()
 	{}
 
-	Vector3::Vector3(const Metric3<float> &metric)
+	inline Vector3::Vector3(const Metric3<float> &metric)
 		: Metric3(metric)
 	{}
 
-	Vector3 &Vector3::multiply(const float &scalar)
+	inline Vector3 &Vector3::multiply(const float &scalar)
 	{
 		x *= scalar;
 		y *= scalar;
@@ -23,12 +23,12 @@ namespace fw
 		return *this;
 	}
 
-	Vector3 &Vector3::operator*=(const float &scalar)
+	inline Vector3 &Vector3::operator*=(const float &scalar)
 	{
 		return multiply(scalar);
 	}
 
-	Vector3 &Vector3::normalize()
+	inline Vector3 &Vector3::normalize()
 	{
 		float scale = 1.0f / magnitude();
 		x *= scale;
@@ -38,12 +38,12 @@ namespace fw
 		return *this;
 	}
 
-	Vector3 Vector3::normalize(Vector3 vector)
+	inline Vector3 Vector3::normalize(Vector3 vector)
 	{
 		return vector.normalize();
 	}
 
-	Vector3 Vector3::cross(const Vector3 &left, const Vector3 &right)
+	inline Vector3 Vector3::cross(const Vector3 &left, const Vector3 &right)
 	{
 		return Vector3(
 			(left.y * right.z) - (left.z * right.y),
@@ -51,32 +51,32 @@ namespace fw
 			(left.x * right.y) - (left.y * right.x));
 	}
 
-	float Vector3::dot(const Vector3 &other) const
+	inline float Vector3::dot(const Vector3 &other) const
 	{
 		return (x * other.x) + (y * other.y) + (z * other.z);
 	}
 
-	float Vector3::dot(const Vector3 &left, const Vector3 &right)
+	inline float Vector3::dot(const Vector3 &left, const Vector3 &right)
 	{
 		return left.dot(right);
 	}
 
-	float Vector3::magnitude_squared() const
+	inline float Vector3::magnitude_squared() const
 	{
 		return (x * x) + (y * y) + (z * z);
 	}
 
-	float Vector3::magnitude() const
+	inline float Vector3::magnitude() const
 	{
 		return std::sqrt(magnitude_squared());
 	}
 
-	Vector3 operator*(Vector3 vector, const float &scalar)
+	inline Vector3 operator*(Vector3 vector, const float &scalar)
 	{
 		return vector.multiply(scalar);
 	}
 
-	Vector3 operator*(const float &scalar, Vector3 vector)
+	inline Vector3 operator*(const float &scalar, Vector3 vector)
 	{
 		return vector.multiply(scalar);
 	}

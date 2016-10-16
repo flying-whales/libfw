@@ -6,11 +6,11 @@
 namespace fw
 {
 
-	Matrix4::Matrix4()
+	inline Matrix4::Matrix4()
 		: elements{ 0 }
 	{}
 
-	Matrix4::Matrix4(const float &diagonal)
+	inline Matrix4::Matrix4(const float &diagonal)
 		: Matrix4()
 	{
 		blocks[0].x = diagonal;
@@ -19,7 +19,7 @@ namespace fw
 		blocks[3].w = diagonal;
 	}
 
-	Matrix4 &Matrix4::multiply(const Matrix4 &other)
+	inline Matrix4 &Matrix4::multiply(const Matrix4 &other)
 	{
 		Matrix4 buffer;
 		for (int y = 0; y < 4; y++)
@@ -34,17 +34,17 @@ namespace fw
 		return *this;
 	}
 
-	Matrix4 &Matrix4::operator*=(const Matrix4 &other)
+	inline Matrix4 &Matrix4::operator*=(const Matrix4 &other)
 	{
 		return multiply(other);
 	}
 
-	float Matrix4::trace() const
+	inline float Matrix4::trace() const
 	{
 		return blocks[0].x + blocks[1].y + blocks[2].z + blocks[3].w;
 	}
 
-	Matrix4 Matrix4::orthographic(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far)
+	inline Matrix4 Matrix4::orthographic(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far)
 	{
 		Matrix4 result(1.0f);
 
@@ -59,7 +59,7 @@ namespace fw
 		return result;
 	}
 
-	Matrix4 Matrix4::perspective_field_of_view(const float &fov, const float &aspect, const float &near, const float &far)
+	inline Matrix4 Matrix4::perspective_field_of_view(const float &fov, const float &aspect, const float &near, const float &far)
 	{
 		auto ymax = near * std::tan(fov / 2.0f);
 		auto ymin = -ymax;
@@ -69,7 +69,7 @@ namespace fw
 		return perspective_off_center(xmin, xmax, ymin, ymax, near, far);
 	}
 
-	Matrix4 Matrix4::perspective_off_center(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far)
+	inline Matrix4 Matrix4::perspective_off_center(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far)
 	{
 		Matrix4 result(1.0f);
 
@@ -87,7 +87,7 @@ namespace fw
 		return result;
 	}
 
-	Matrix4 Matrix4::look_at(const Vector3 &eye, const Vector3 &target, const Vector3 &up)
+	inline Matrix4 Matrix4::look_at(const Vector3 &eye, const Vector3 &target, const Vector3 &up)
 	{
 		auto z = Vector3::normalize(eye - target);
 		auto x = Vector3::normalize(Vector3::cross(up, z));
@@ -114,14 +114,14 @@ namespace fw
 		return result;
 	}
 
-	Matrix4 Matrix4::translation(const Vector3 &translation)
+	inline Matrix4 Matrix4::translation(const Vector3 &translation)
 	{
 		Matrix4 result(1.0f);
 		result.blocks[3].xyz = translation;
 		return result;
 	}
 
-	Matrix4 Matrix4::rotation(const float &angle, const Vector3 &axis)
+	inline Matrix4 Matrix4::rotation(const float &angle, const Vector3 &axis)
 	{
 		float r = angle;
 		float c = std::cos(r);
@@ -145,7 +145,7 @@ namespace fw
 		return result;
 	}
 
-	Matrix4 Matrix4::scale(const Vector3 &scale)
+	inline Matrix4 Matrix4::scale(const Vector3 &scale)
 	{
 		Matrix4 result(1.0f);
 		result.blocks[0].x = scale.x;
@@ -154,7 +154,7 @@ namespace fw
 		return result;
 	}
 
-	Matrix4 operator*(Matrix4 left, const Matrix4 &right)
+	inline Matrix4 operator*(Matrix4 left, const Matrix4 &right)
 	{
 		return left.multiply(right);
 	}

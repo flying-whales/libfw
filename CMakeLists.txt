@@ -12,6 +12,7 @@ include("utilities")
 #
 set(libfw_src_files
     "src/core/exception.cpp"
+    "src/window/window_win.cpp"
 )
 fw_process_src_files(${libfw_src_files})
 
@@ -35,3 +36,11 @@ target_include_directories(libfw PUBLIC ${libfw_include_dir})
 # libfw already has a `lib` prepended so ensure any other prefix is removed
 set_target_properties(libfw PROPERTIES PREFIX "")
 set_target_properties(libfw PROPERTIES IMPORT_PREFIX "")
+
+# external dependencies
+set(Boost_USE_STATIC_LIBS ON)
+find_package(Boost REQUIRED COMPONENTS system locale)
+if(Boost_FOUND)
+    target_include_directories(libfw PUBLIC ${Boost_INCLUDE_DIRS})
+    target_link_libraries(libfw ${Boost_LIBRARIES})
+endif()

@@ -223,10 +223,10 @@ namespace fw
 		return _focus;
 	}
 
-	void WindowWin::set_focus()
+	void WindowWin::set_focus(bool focus)
 	{
-		_focus = true;
-		SetFocus(_window_handle);
+		_focus = focus;
+		SetFocus(_focus ? _window_handle : nullptr);
 	}
 
 }

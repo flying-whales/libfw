@@ -58,7 +58,7 @@ namespace fw
 		void set_mouse_position(const Size2 &position) override;
 
 		bool get_focus() const override;
-		void set_focus() override;
+		void set_focus(bool focus) override;
 	};
 
 }

@@ -44,7 +44,7 @@ namespace fw
 		virtual void set_mouse_position(const Size2 &position) = 0;
 
 		virtual bool get_focus() const = 0;
-		virtual void set_focus() = 0;
+		virtual void set_focus(bool focus) = 0;
 	};
 
 }
